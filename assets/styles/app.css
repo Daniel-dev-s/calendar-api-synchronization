@@ -1,7 +1,56 @@
 body {
     background-color: seagreen;
 }
+.header{
+    margin:1em;
+}
+.container{
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    margin:0;
+}
+.calendar-title{
+    width:80%;
+    padding:5px 15px;
+    border:2px solid darkslategray;
+    font-size:1.3em;
+    text-align: center;
+    margin: 5px auto;
+    cursor:pointer;
+}
+#toolbar{
+    width:15%;
+}
 #calendar{
-    width:70%;
+    width:80%;
+}
+.modal{
+    position:absolute;
+    z-index: 999;
+    left:20%;
+    top:5em;
+    display:none;
+}
+.import-calendar{
+    width:40%;
     margin:0 auto;
+    height:10em;
+    overflow-y:scroll;
+    background:white;
+    border:none;
+    box-shadow:0 0 3px black;
+}
+#close-modal{
+    background: red;
+    color:white;
+    width:5em;
+}
+#showImportCalendarModal{
+    width:80%;
+    height:50px;
+    padding:4px;
+    border:1px solid white;
+    color:white;
+    text-decoration: none;
 }

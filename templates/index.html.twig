@@ -1,7 +1,36 @@
 {% extends 'base.html.twig' %}
-{% block body %}
-<h1>My Calendar</h1>
-    <div id="calendar">
-
+{% block header %}
+    <div class="header">
+        <h1>My Calendar</h1>
     </div>
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div id="toolbar">
+            <div>
+                <a href="#" id="showImportCalendarModal">Add more</a>
+            </div>
+        </div>
+        <div id="calendar">
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block modal %}
+    <div class="modal import-calendar">
+        <div class="calendar-title" id="close-modal">
+            Close
+        </div>
+        {% if availableCalendars is defined %}
+            {% for calendar in availableCalendars %}
+                <div class="calendar-title calendar-entity" id="{{ calendar.getId }}">
+                    {{ calendar.getSummary }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    {{ encore_entry_script_tags('importCalendar') }}
 {% endblock %}

@@ -1,0 +1,14 @@
+{
+  "web": {
+    "client_id": "291164876933-8r6me29362thg0lf0ubkddsb1h684g4j.apps.googleusercontent.com",
+    "project_id": "banded-chimera-302818",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "t5xCw3z7SRWBitKhWFfHF2kX",
+    "redirect_uris": [
+      "http://127.0.0.1:8000",
+      "http://127.0.0.1:8000/oauth"
+    ]
+  }
+}
