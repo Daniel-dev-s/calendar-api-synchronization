@@ -6,6 +6,7 @@
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
+/token/
 /vendor/
 ###< symfony/framework-bundle ###
 
@@ -14,4 +15,5 @@
 /public/build/
 npm-debug.log
 yarn-error.log
+client_id_2.json
 ###< symfony/webpack-encore-bundle ###
