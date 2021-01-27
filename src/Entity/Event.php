@@ -23,7 +23,7 @@ class Event
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $calendarId;
 
@@ -36,6 +36,21 @@ class Event
      * @ORM\Column(type="datetime")
      */
     private $endTime;
+
+    /**
+     * Event constructor.
+     * @param $name
+     * @param $calendarId
+     * @param $start
+     * @param $endTime
+     */
+    public function __construct($name, $calendarId, $start, $endTime)
+    {
+        $this->name = $name;
+        $this->calendarId = $calendarId;
+        $this->start = $start;
+        $this->endTime = $endTime;
+    }
 
     public function getId(): ?int
     {

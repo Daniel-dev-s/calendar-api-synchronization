@@ -23,7 +23,7 @@ class Calendar
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $googleId;
 
@@ -63,12 +63,12 @@ class Calendar
         return $this;
     }
 
-    public function getGoogleId(): ?int
+    public function getGoogleId(): ?string
     {
         return $this->googleId;
     }
 
-    public function setGoogleId(int $googleId): self
+    public function setGoogleId(string $googleId): self
     {
         $this->googleId = $googleId;
 

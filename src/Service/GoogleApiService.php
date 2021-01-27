@@ -4,12 +4,14 @@ declare(strict_types=1);
 namespace App\Service;
 
 
-use Google\Exception;
+use Exception;
 use Google_Client;
 use Google_Service_Calendar;
+use Google_Service_Calendar_Calendar;
 use Google_Service_Calendar_CalendarList;
+use Google_Service_Calendar_Event;
 
-class AuthService
+class GoogleApiService
 {
     private string $tokenFolder = '../token/';
     private string $tokenFile = 'token.json';
@@ -64,14 +66,42 @@ class AuthService
         }
         return $client;
     }
-    public function getCalendars(Google_Client $client): Google_Service_Calendar_CalendarList
+    public function getAvailableCalendars(Google_Client $client,
+                                          array $persistedCalendars): array
     {
         $service = new Google_Service_Calendar($client);
-        return $service->calendarList->listCalendarList();
+        $all = $service->calendarList->listCalendarList();
+        $available = [];
+        foreach($all as $gettedCalendar){
+            $canAdd = true;
+            foreach($persistedCalendars as $pCalendar){
+                if($pCalendar->getGoogleId() === $gettedCalendar->getId())
+                {
+                    $canAdd = false;
+                }
+            }
+            if($canAdd)array_push($available,$gettedCalendar);
+        }
+        return $available;
     }
-    public function getEvents(Google_Client $client, string $id)
+
+    public function getCalendarById(string $id) : Google_Service_Calendar_Calendar
     {
-        $service = new Google_Service_Calendar($client);
-        return $service->events->listEvents($id);
+        $calendar = null;
+        if(($client = $this->tryAuthenticate())!==null) {
+            $service = new Google_Service_Calendar($client);
+            $calendar = $service->calendars->get($id);
+        }
+        return $calendar;
+    }
+
+    public function getEvents(string $id) :?array
+    {
+        $events = null;
+        if(($client = $this->tryAuthenticate())!==null) {
+            $service = new Google_Service_Calendar($client);
+            $events = $service->events->listEvents($id)->getItems();
+        }
+        return $events;
     }
 }

@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 body {
     background-color: seagreen;
 }
@@ -11,19 +14,20 @@ body {
     margin:0;
 }
 .calendar-title{
-    width:80%;
+    width:90%;
     padding:5px 15px;
     border:2px solid darkslategray;
     font-size:1.3em;
     text-align: center;
-    margin: 5px auto;
+    margin: 5px 5px;
+    overflow-x: hidden;
     cursor:pointer;
 }
 #toolbar{
-    width:15%;
+    width:25%;
 }
 #calendar{
-    width:80%;
+    width:70%;
 }
 .modal{
     position:absolute;
@@ -33,24 +37,41 @@ body {
     display:none;
 }
 .import-calendar{
-    width:40%;
+    width:30%;
+    max-height:400px;
+    height:200px;
+    min-height: 100px;
     margin:0 auto;
-    height:10em;
-    overflow-y:scroll;
-    background:white;
+    background:rgba(255,255,255,0.9);
     border:none;
     box-shadow:0 0 3px black;
 }
+.calendar-list{
+    max-height:400px;
+    height:200px;
+    overflow-y:scroll;
+}
 #close-modal{
-    background: red;
-    color:white;
-    width:5em;
+    background-image: url("../icons/cancel.png");
+    background-repeat:no-repeat;
+    border-radius: 10px;
+    border:none;
+    width:32px;
+    height:32px;
+    float:right;
 }
 #showImportCalendarModal{
-    width:80%;
-    height:50px;
+    width:100px;
+    height:30px;
     padding:4px;
     border:1px solid white;
     color:white;
     text-decoration: none;
+    margin:5px auto;
+    display:block;
+    text-align:center;
+}
+.import-message{
+    font-size:1.5em;
+    text-align: center;
 }
