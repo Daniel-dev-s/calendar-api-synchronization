@@ -1,39 +1,66 @@
 {% extends 'base.html.twig' %}
 {% block header %}
-    <div class="header">
-        <h1>My Calendar</h1>
-    </div>
+
 
 {% endblock %}
 
 {% block body %}
     <div class="container">
         <div id="toolbar">
+            <div class="header">
+                <h1>My Calendar</h1>
+            </div>
             <div>
                 {% if persistedCalendars is defined %}
                     {% for calendar in persistedCalendars %}
                         <div class="calendar-title calendar-select" id="{{ calendar.getGoogleId }}">
                             {{ calendar.getName }}
+                            <br>
+                            <span>{{ calendar.getLastSyncString }}</span>
                         </div>
                     {% endfor %}
                 {% endif %}
             </div>
             <div>
-                <a href="#" id="showImportCalendarModal">Add more</a>
+                <a href="#" id="showImportCalendarModal"></a>
             </div>
         </div>
         <div id="calendar">
-
+        </div>
+        <div id="rightbar">
+            <a href="/oauth">Google Oauth</a>
         </div>
     </div>
 {% endblock %}
 
+{%  block loader %}
+    <div class="loader">
+        <h2>Loading...</h2>
+        <div class="lds-default">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div></div>
+{%  endblock %}
+
 {% block modal %}
     <div class="modal import-calendar">
-        <div class="calendar-title" id="close-modal"></div>
+        <div class="my-modal-header">
+        <h2>available calendars:</h2>
+            <div id="close-modal"></div>
+        </div>
         {% if availableCalendars is defined %}
             {% if availableCalendars is not empty %}
-                <div class="calendar-list">
+                <div>
                     {% for calendar in availableCalendars %}
                         <div class="calendar-title calendar-entity" id="{{ calendar.getId }}">
                             {{ calendar.getSummary }}

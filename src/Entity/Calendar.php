@@ -86,4 +86,8 @@ class Calendar
 
         return $this;
     }
+    public function getLastSyncString(): string
+    {
+        return $this->getLastSync()->format("d-M-Y H:m:s");
+    }
 }

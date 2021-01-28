@@ -42,16 +42,15 @@ class CalendarController extends AbstractController
                 ->findBy(["googleId" => $id]);
             if ($calendar == null) {
                 $remoteCalendar = $this->googleApiService->getCalendarById($id);
-                $calendar = new Calendar($remoteCalendar->getSummary(),
+                $calendar = new Calendar(
+                    $remoteCalendar->getSummary(),
                     $id,
                     new DateTime()
                 );
                 $events = $this->googleApiService->getEvents($id);
+
                 foreach ($events as $event) {
-                    $event_to_add = new Event($event->getSummary(),
-                        $id,//TODO start and end can be null
-                        new DateTime($event->getStart()->getDateTime()),
-                        new DateTime($event->getEnd()->getDateTime()));
+                    $event_to_add = $this->calendarService->getEventEntity($event,$id);
                     $manager->persist($event_to_add);
                 }
                 $manager->persist($calendar);
@@ -64,7 +63,7 @@ class CalendarController extends AbstractController
     /**
      * @Route("/getEvents", name="get_events", methods={"POST","GET"})
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
     public function getEvents(Request $request): JsonResponse
     {
@@ -76,4 +75,5 @@ class CalendarController extends AbstractController
         }
         return new JsonResponse($query->getArrayResult());
     }
+
 }

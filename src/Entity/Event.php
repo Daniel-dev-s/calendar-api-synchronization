@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Cassandra\Date;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,42 +18,44 @@ class Event
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $calendarId;
+    private string $calendarId;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private $start;
+    private ?DateTime $start;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private $endTime;
+    private ?DateTime $endTime;
+
 
     /**
      * Event constructor.
-     * @param $name
-     * @param $calendarId
-     * @param $start
-     * @param $endTime
+     * @param string $name
+     * @param string $calendarId
+     * @param DateTime|null $start
+     * @param DateTime|null $endTime
      */
-    public function __construct($name, $calendarId, $start, $endTime)
+    public function __construct(string $name, string $calendarId, ?DateTime $start, ?DateTime $endTime)
     {
         $this->name = $name;
         $this->calendarId = $calendarId;
         $this->start = $start;
         $this->endTime = $endTime;
     }
+
 
     public function getId(): ?int
     {
@@ -81,27 +86,28 @@ class Event
         return $this;
     }
 
-    public function getStart(): ?\DateTimeInterface
+    public function getStart(): ?DateTimeInterface
     {
         return $this->start;
     }
 
-    public function setStart(\DateTimeInterface $start): self
+    public function setStart(?DateTimeInterface $start): self
     {
         $this->start = $start;
 
         return $this;
     }
 
-    public function getEndTime(): ?\DateTimeInterface
+    public function getEndTime(): ?DateTimeInterface
     {
         return $this->endTime;
     }
 
-    public function setEndTime(\DateTimeInterface $endTime): self
+    public function setEndTime(?DateTimeInterface $endTime): self
     {
         $this->endTime = $endTime;
 
         return $this;
     }
+
 }
